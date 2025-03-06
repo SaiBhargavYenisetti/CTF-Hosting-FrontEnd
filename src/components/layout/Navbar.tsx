@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="text-2xl font-bold text-zinc-900 dark:text-zinc-100"
               to="/"
             >
-              CTFv
+              WHH
             </Link>
 
             {/* Left-side navigation items (visible on md and above) */}
