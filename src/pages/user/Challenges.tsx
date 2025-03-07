@@ -22,7 +22,7 @@ type Challenge = {
   id: string;
   name: string;
   description: string;
-  url: string;
+  url?: string;
   points: number;
   author: string;
   date: string;
