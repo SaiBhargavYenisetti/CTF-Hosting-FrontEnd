@@ -15,7 +15,7 @@ export interface Challenge {
   id: string;
   name: string;
   description: string;
-  url: string;
+  url?: string;
   points: number;
   category: string;
   author: string;
