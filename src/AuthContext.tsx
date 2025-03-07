@@ -15,7 +15,7 @@ export interface Challenge {
   id: string;
   name: string;
   description: string;
-  url: string;
+  url?: string; // Changed from url: string to url?: string to make it optional
   points: number;
   category: string;
   author: string;
