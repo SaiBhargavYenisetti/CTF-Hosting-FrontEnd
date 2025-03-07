@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 export const CreateChallenge: React.FC = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(""); // This remains but won't be required
   const [points, setPoints] = useState(0);
   const [category, setCategory] = useState("web");
   const [author, setAuthor] = useState("");
@@ -29,16 +29,19 @@ export const CreateChallenge: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await createChallenge({
+      // Only include url in the object if it's not empty
+      const challengeData = {
         name,
         description,
-        url,
+        ...(url && { url }), // Conditional spread: only adds url if it exists
         points,
         category,
         author,
         flag,
         date,
-      });
+      };
+      
+      await createChallenge(challengeData);
       navigate("/challenges");
     } catch (error) {
       console.error("Challenge creation failed:", error);
@@ -95,15 +98,15 @@ export const CreateChallenge: React.FC = () => {
               htmlFor="url"
               className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
             >
-              URL
+              URL (Optional)
             </label>
             <Input
               id="url"
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter the challenge URL"
-              required
+              placeholder="Enter the challenge URL (optional)"
+              // removed required prop
               className="w-full"
             />
           </div>
