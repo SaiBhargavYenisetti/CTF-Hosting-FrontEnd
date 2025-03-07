@@ -14,10 +14,15 @@ import { Textarea } from "@/components/ui/textarea";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+// If you have access to the Challenge interface, you could define this type
+interface ChallengeInput extends Omit<Challenge, "id"> {
+  url?: string; // Make url optional
+}
+
 export const CreateChallenge: React.FC = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [url, setUrl] = useState(""); // This remains but won't be required
+  const [url, setUrl] = useState("");
   const [points, setPoints] = useState(0);
   const [category, setCategory] = useState("web");
   const [author, setAuthor] = useState("");
@@ -29,11 +34,10 @@ export const CreateChallenge: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Only include url in the object if it's not empty
       const challengeData = {
         name,
         description,
-        ...(url && { url }), // Conditional spread: only adds url if it exists
+        ...(url && { url }), // Only include url if it exists
         points,
         category,
         author,
@@ -106,7 +110,6 @@ export const CreateChallenge: React.FC = () => {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Enter the challenge URL (optional)"
-              // removed required prop
               className="w-full"
             />
           </div>
