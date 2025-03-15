@@ -139,7 +139,7 @@ const FlagSubmission: React.FC<{
   <div className="my-4">
     <Input
       value={flagInput}
-      onChange={(e) => setFlagInput(e.target.value)}
+      onChange={(e) => setFlagInput(e.target.value.toUpperCase())} // Convert to uppercase here
       placeholder="Enter flag"
     />
     <Button
