@@ -27,7 +27,7 @@ export const EditChallenge: React.FC = () => {
   const [date, setDate] = useState("");
   const [flag, setFlag] = useState("");
 
-  const id = new URLSearchParams(location.search).get("id");
+  const id = new URLSearchParams(location.search).get("id") || "";
 
   useEffect(() => {
     const fetchChallenge = async () => {
@@ -41,7 +41,7 @@ export const EditChallenge: React.FC = () => {
         if (challenge) {
           setName(challenge.name);
           setDescription(challenge.description);
-          setUrl(challenge.url);
+          setUrl(challenge.url || "");
           setPoints(challenge.points);
           setCategory(challenge.category);
           setAuthor(challenge.author);

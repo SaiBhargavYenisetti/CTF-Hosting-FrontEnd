@@ -1,5 +1,6 @@
 import { useAuth } from "@/AuthContext";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -15,9 +16,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // If you have access to the Challenge interface, you could define this type
-interface ChallengeInput extends Omit<Challenge, "id"> {
-  url?: string; // Make url optional
-}
 
 export const CreateChallenge: React.FC = () => {
   const [name, setName] = useState("");
