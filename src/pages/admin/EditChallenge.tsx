@@ -34,29 +34,35 @@ export const EditChallenge: React.FC = () => {
       try {
         const challenges = await getChallenges();
         console.log(challenges);
+  
         const challenge = challenges
           .flatMap((c) => c.challenges)
           .find((c) => c.id === id);
-
-        if (challenge) {
-          setName(challenge.name);
-          setDescription(challenge.description);
-          setUrl(challenge.url || "");
-          setPoints(challenge.points);
-          setCategory(challenge.category);
-          setAuthor(challenge.author);
-          setFlag(challenge.flag || "");
-          setDate(challenge.date || "");
+  
+        // Ensure challenge exists before updating state
+        if (!challenge) {
+          console.error("Challenge not found!");
+          return;
         }
+  
+        setName(challenge.name);
+        setDescription(challenge.description);
+        setUrl(challenge.url ?? "");  // Handle undefined
+        setPoints(challenge.points);
+        setCategory(challenge.category);
+        setAuthor(challenge.author);
+        setFlag(challenge.flag ?? "");
+        setDate(challenge.date ?? "");
       } catch (error) {
         console.error("Failed to fetch challenge:", error);
       }
     };
-
+  
     if (id) {
       fetchChallenge();
     }
   }, [id, getChallenges]);
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
